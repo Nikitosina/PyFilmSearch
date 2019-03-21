@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <h1>Добавление Фильма</h1>
+    <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name }}<br>
+        </p>
+        <p>
+            {{ form.genre.label }}<br>
+            {{ form.genre }}<br>
+        </p>
+        <p>
+            {{ form.director.label }}<br>
+            {{ form.director }}<br>
+        </p>
+        <p>
+            {{ form.image.label }}<br>
+            {{ form.image }}<br>
+        </p>
+        <p>
+            {{ form.date.label }}<br>
+            {{ form.date }}<br>
+        </p>
+        <p>
+            {{ form.time.label }}<br>
+            {{ form.time }}<br>
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description }}<br>
+        </p>
+        <p>
+            {% for error in form.name.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

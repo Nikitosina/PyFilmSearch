@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <h1>Личный кабинет</h1>
+    <p>Имя: {{user[1]}}</p>
+    <p>Статус: {{user[3]}}</p>
+    <p>Ваш id: {{user[0]}}</p>
+    <h1>Избранное</h1>
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        {% for film in fav %}
+            <div class="card">
+                <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
+              <div class="card-block">
+                <p class="card-title" align="center">{{ film[0] }}</p>
+                <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+    <a class="btn btn-danger btn-lg" href="/logout">Выйти</a>
+{% endblock %}

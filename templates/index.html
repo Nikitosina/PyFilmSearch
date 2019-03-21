@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <h1>Главная</h1>
+
+    <h3>Новинки</h3>
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        {% for film in new_films %}
+            <div class="card">
+                <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
+              <div class="card-block">
+                <p class="card-title" align="center">{{ film[0] }}</p>
+                <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+    <h3>Боевики</h3>
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        {% for film in action_mov %}
+            <div class="card">
+                <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
+              <div class="card-block">
+                <p class="card-title" align="center">{{ film[0] }}</p>
+                <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

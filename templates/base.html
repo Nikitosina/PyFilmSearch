@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{{title}}</title>
+</head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">FILM-SEARCH</a>
+        <div class="col-lg-6">
+            <div class="input-group">
+              <form action="/search" method="post">
+                  <input name="req" type="text" class="form-control" placeholder="Поиск...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit">Искать!</button>
+                  </span>
+              </form>
+            </div>
+          </div>
+          {% if "username" in session %}
+            <a class="navbar-brand" href="/account">{{session['username']}}</a>
+          {% else %}
+            <a class="navbar-brand" href="/login">Войти</a>
+          {% endif %}
+      </nav>
+      {% for s in success %}
+        <div class="alert alert-success" role="alert">{{s}}</div>
+      {% endfor %}
+    </header>
+    <!-- Begin page content -->
+    <main role="main" class="container">
+        {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

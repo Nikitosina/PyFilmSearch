@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+      <form action="" method="post">
+          {% if not user_fav %}
+            <h1>{{ film[1] }} <button type="submit" class="btn btn-warning">В избранное</button></h1>
+          {% else %}
+            <h1>{{ film[1] }} <button type="submit" class="btn btn-danger">Удалить из избранного</button></h1>
+          {% endif %}
+      </form>
+
+    <style type="text/css">
+       .block1 {
+        width: 375px;
+        background: #ccc;
+        padding: 5px;
+        padding-right: 20px;
+        border: solid 1px black;
+        float: left;
+       }
+       .block2 {
+        width: 500px;
+        background: #9abff9;
+        border: solid 1px black;
+        float: left;
+        position: relative;
+        left: 30px;
+        vertical-align: top;
+       }
+       .block3 {
+        width: 500px;
+        background: #96e8e3;
+        border: solid 1px black;
+        position: relative;
+        float: left;
+        left: 30px;
+        top: 10px;
+       }
+       .table {
+        width: 200px;
+        padding: 30px;
+        position: relative;
+       }
+    </style>
+
+    <div class="block1">
+      <img src="{{ film[4] }}">
+    </div>
+    <div class="block2">
+      <table>
+        <tr>
+          <td class="table">Жанр</td>
+          <td>{{ film[2] }}</td>
+        </tr>
+        <tr>
+          <td class="table">Режиссёр</td>
+          <td>{{ film[3] }}</td>
+        </tr>
+        <tr>
+          <td class="table">Премьера</td>
+          <td>{{ film[5] }}</td>
+        </tr>
+        <tr>
+          <td class="table">Продолжительность</td>
+          <td>{{ film[6] }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="block3">
+      Описание:<br><br>
+      {{ film[7] }}
+    </div>
+{% endblock %}
