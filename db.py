@@ -126,7 +126,8 @@ class FilmsModel:
                               LIMIT {}'''.format(id[:-1], limit))
         elif order and arg:
             cursor.execute(f'''SELECT name, genre, image_url, date, id FROM films 
-                              WHERE (name LIKE '%{arg}%' or content LIKE '%{arg}%' or genre LIKE '%{arg}%' or date LIKE '%{arg}%')''')
+                              WHERE (name LIKE '%{arg}%' or content LIKE '%{arg}%' or genre LIKE '%{arg}%' or date LIKE '%{arg}%')
+                              LIMIT {limit}''')
         elif order:
             cursor.execute('''SELECT name, genre, image_url, date, id FROM films
                               ORDER BY {} DESC

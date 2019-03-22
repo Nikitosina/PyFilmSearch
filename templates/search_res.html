@@ -3,9 +3,10 @@
 {% block content %}
     <h1>Результаты поиска</h1>
 
+    {% for row in res %}
     <div class="card-deck-wrapper">
       <div class="card-deck">
-        {% for film in res %}
+        {% for film in row %}
             <div class="card">
                 <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
               <div class="card-block">
@@ -16,4 +17,5 @@
         {% endfor %}
       </div>
     </div>
+    {% endfor %}
 {% endblock %}

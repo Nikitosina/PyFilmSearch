@@ -19,6 +19,27 @@ def abort_if_films_not_found(id):
         abort(404, message="Films {} not found".format(id))
 
 
+def optimize_cards(data):
+    if len(data) < 5:
+        while len(data) != 5:
+            data.append(('Пусто', '-', '...', '-', '0'))
+        return [data]
+    elif len(data) == 5:
+        return [data]
+    elif len(data) > 5:
+        new = []
+        a = []
+        for i in range(len(data)):
+            a.append(data[i])
+            if (i + 1) % 5 == 0:
+                new.append(a)
+                a = []
+        new.append(a)
+        new[-1] = optimize_cards(new[-1])[0]
+        data = new
+    return data
+
+
 class Films(Resource):
     def get(self, id):
         abort_if_films_not_found(id)
@@ -54,8 +75,8 @@ api.add_resource(FilmsList, '/films')
 @app.route('/')
 @app.route('/index')
 def home():
-    new_films = FILMS.get_all(order='date', limit=5)
-    action_mov = FILMS.get_all(order='genre', arg='боевик', limit=5)
+    new_films = optimize_cards(FILMS.get_all(order='date', limit=5))
+    action_mov = optimize_cards(FILMS.get_all(order='genre', arg='боевик', limit=5))
     print(action_mov)
     if 'success' not in session:
         return render_template('index.html', title='Главная', new_films=new_films, action_mov=action_mov)
@@ -106,7 +127,7 @@ def registration():
 def account():
     user = USERS.get(session['user_id'])
     print(user)
-    fav = FILMS.get_all(id=user[4], limit='5')
+    fav = optimize_cards(FILMS.get_all(id=user[4], limit='5'))
     print(fav)
     return render_template('account.html', title='Личный кабинет', user=user, fav=fav)
 
@@ -162,9 +183,10 @@ def search():
 
 @app.route('/search/<string:s>')
 def searcher(s):
-    res = FILMS.get_all(order='genre', arg=s, limit=5)
+    res = FILMS.get_all(order='genre', arg=s)
+    res = optimize_cards(res)
     return render_template('search_res.html', title='Поиск', res=res)
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='localhost')
