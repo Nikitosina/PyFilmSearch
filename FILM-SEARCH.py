@@ -127,7 +127,7 @@ def registration():
 def account():
     user = USERS.get(session['user_id'])
     print(user)
-    fav = optimize_cards(FILMS.get_all(id=user[4], limit='5'))
+    fav = optimize_cards(FILMS.get_all(film_id=user[4], limit='5', ret=False))
     print(fav)
     return render_template('account.html', title='Личный кабинет', user=user, fav=fav)
 
@@ -189,4 +189,4 @@ def searcher(s):
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='localhost')
+    app.run(port=8080, host='192.168.0.25')

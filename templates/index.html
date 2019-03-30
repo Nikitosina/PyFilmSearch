@@ -8,13 +8,18 @@
     <div class="card-deck-wrapper">
       <div class="card-deck">
         {% for film in row %}
-            <div class="card">
-                <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
-              <div class="card-block">
-                <p class="card-title" align="center">{{ film[0] }}</p>
-                <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
-              </div>
-            </div>
+            {% if film[0] == 'Пусто' %}
+                <div class="card" style="border: 0px">
+                </div>
+            {% else %}
+                <div class="card">
+                    <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
+                  <div class="card-block">
+                    <p class="card-title" align="center">{{ film[0] }}</p>
+                    <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
+                  </div>
+                </div>
+            {% endif %}
         {% endfor %}
       </div>
     </div>
@@ -24,13 +29,18 @@
     <div class="card-deck-wrapper">
       <div class="card-deck">
         {% for film in row %}
-            <div class="card">
-                <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
-              <div class="card-block">
-                <p class="card-title" align="center">{{ film[0] }}</p>
-                <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
-              </div>
-            </div>
+            {% if film[0] == 'Пусто' %}
+                <div class="card" style="border: 0px">
+                </div>
+            {% else %}
+                <div class="card">
+                    <a href="/films/{{ film[4] }}"><img class="card-img-top" src="{{ film[2] }}" alt="Card image cap"></a>
+                  <div class="card-block">
+                    <p class="card-title" align="center">{{ film[0] }}</p>
+                    <p class="card-text" align="center"><small class="text-muted">{{ film[1] }}, {{ film[3] }}</small></p>
+                  </div>
+                </div>
+            {% endif %}
         {% endfor %}
       </div>
     </div>

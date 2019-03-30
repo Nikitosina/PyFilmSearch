@@ -119,11 +119,11 @@ class FilmsModel:
         row = cursor.fetchone()
         return row
 
-    def get_all(self, id=None, limit=1000, order=False, arg=None):
+    def get_all(self, film_id=None, limit=1000, order=False, arg=None, ret=True):
         cursor = self.conn.cursor()
-        if id:
-            cursor.execute('''SELECT name, genre, image_url, date, id FROM films WHERE id IN ({})
-                              LIMIT {}'''.format(id[:-1], limit))
+        if film_id is not None and film_id != '':
+                cursor.execute('''SELECT name, genre, image_url, date, id FROM films WHERE id IN ({})
+                                  LIMIT {}'''.format(film_id[:-1], limit))
         elif order and arg:
             cursor.execute(f'''SELECT name, genre, image_url, date, id FROM films 
                               WHERE (name LIKE '%{arg}%' or content LIKE '%{arg}%' or genre LIKE '%{arg}%' or date LIKE '%{arg}%')
@@ -133,7 +133,10 @@ class FilmsModel:
                               ORDER BY {} DESC
                               LIMIT {}'''.format(order, limit))
         else:
-            cursor.execute("SELECT id, name FROM films")
+            if ret:
+                cursor.execute("SELECT id, name FROM films")
+            else:
+                return []
         rows = cursor.fetchall()
         return rows
 
